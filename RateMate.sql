@@ -1,6 +1,6 @@
 
 -- Opprett et skjema med navn "ratemate" i databasen--
--- Forelesere, studenter og fag mÃ¥ legges manuelt inn i databasen -- 
+-- Forelesere, studenter og fag må legges manuelt inn i databasen -- 
 
 CREATE TABLE IF NOT EXISTS ratemate.fag (
 emnekode 		VARCHAR(15) NOT NULL,
@@ -12,7 +12,7 @@ ansattnr 		VARCHAR(6)	NOT NULL,
 navn 			VARCHAR(40),
 passord			VARCHAR(50) NOT NULL,
 fagliste		VARCHAR(15),
-PRIMARY KEY(id),
+PRIMARY KEY(ansattnr),
 FOREIGN KEY (fagliste) REFERENCES (ratemate.fag(emnekode));
 
 CREATE TABLE IF NOT EXISTS ratemate.student (

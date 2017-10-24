@@ -14,6 +14,9 @@ public class SessionUtil {
     public static boolean isGyldigStudnr(String studnr) {
         return studnr != null && dbk.finnesStudent(studnr);
     }
+    public static boolean isGyldigForeleser(String ansattnr, String passord) {
+    	return ansattnr != null && passord != null && dbk.finnesForeleser(ansattnr, passord);
+    }
 
     public static boolean isInnlogget(HttpServletRequest request) {
         HttpSession session = request.getSession(false);

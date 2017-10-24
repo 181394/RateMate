@@ -54,4 +54,8 @@ public Forelesning getForelesning(Date dato) {return em.find(Forelesning.class, 
     public boolean finnesStudent(String studnr){
         return (em.find(Student.class, studnr) != null);
     }
+    public boolean finnesForeleser(String ansattnr, String passord){
+    	Foreleser f1 = em.find(Foreleser.class, ansattnr);
+    	return (f1 != null && f1.getPassord().equals(passord));
+    }
 }

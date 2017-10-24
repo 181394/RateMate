@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
+<persistence-unit name="RateMatePersistenceUnit" transaction-type="JTA">
+    <jta-data-source>myDataSource</jta-data-source>
+    <class>no.hib.dat104.model.Fag</class>
+    <class>no.hib.dat104.model.Foreleser</class>
+    <class>no.hib.dat104.model.Forelesning</class>
+    <class>no.hib.dat104.model.Student</class>
+    <properties>
+        <property name="tomee.jpa.cdi" value="false" />
+        <property name="toplink.jdbc.url" value="jdbc:postgresql://data1.hib.no:5433/h181394"/>
+        <property name="toplink.jdbc.driver" value="org.postgresql.Driver"/>
+        <property name="hibernate.connection.url" value="jdbc:postgresql://data1.hib.no:5433/h181394"/>
+        <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+        <property name="openjpa.ConnectionURL" value="jdbc:postgresql://data1.hib.no:5433/h181394"/>
+        <property name="openjpa.ConnectionDriverName" value="org.postgresql.Driver"/>
+        <property name="eclipselink.jdbc.url" value="jdbc:postgresql://data1.hib.no:5433/h181394"/>
+        <property name="eclipselink.jdbc.driver" value="org.postgresql.Driver"/>
+    </properties>
+</persistence-unit>
+</persistence>

@@ -29,6 +29,7 @@ public class StemmeServlet extends HttpServlet {
 		stud.setRating(ny);
 		dbk.UpdateLive(gammel, ny);
 		dbk.UpdateStudent(stud);
+		SessionUtil.setStemme(request, ny);
 		
 		response.sendRedirect("Stem");
 	}

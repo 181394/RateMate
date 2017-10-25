@@ -12,27 +12,19 @@ import javax.persistence.*;
 @Entity
 @Table(name = "forelesning", schema = "ratemate", catalog = "h181394")
 public class Forelesning {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String dato;
 	private String klStart;
 	private String klSlutt;
+	@ManyToOne
+	@JoinColumn(name = "fag", referencedColumnName = "emnekode")
 	private String fag;
-	private String foreleser;
 	private Integer bra;
 	private Integer middels;
 	private Integer daarlig;
-	private Fag fagByFag;
-	private Foreleser foreleserByForeleser;
 
-	@Id
-	@Column(name = "id")
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	@Basic
 	@Column(name = "dato")
@@ -72,16 +64,6 @@ public class Forelesning {
 
 	public void setFag(String fag) {
 		this.fag = fag;
-	}
-
-	@Basic
-	@Column(name = "foreleser")
-	public String getForeleser() {
-		return foreleser;
-	}
-
-	public void setForeleser(String foreleser) {
-		this.foreleser = foreleser;
 	}
 
 	@Basic
@@ -133,8 +115,6 @@ public class Forelesning {
 			return false;
 		if (fag != null ? !fag.equals(that.fag) : that.fag != null)
 			return false;
-		if (foreleser != null ? !foreleser.equals(that.foreleser) : that.foreleser != null)
-			return false;
 		if (bra != null ? !bra.equals(that.bra) : that.bra != null)
 			return false;
 		if (middels != null ? !middels.equals(that.middels) : that.middels != null)
@@ -145,25 +125,6 @@ public class Forelesning {
 		return true;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "fag", referencedColumnName = "emnekode")
-	public Fag getFagByFag() {
-		return fagByFag;
-	}
-
-	public void setFagByFag(Fag fagByFag) {
-		this.fagByFag = fagByFag;
-	}
-
-	@ManyToOne
-	@JoinColumn(name = "foreleser", referencedColumnName = "ansattnr")
-	public Foreleser getForeleserByForeleser() {
-		return foreleserByForeleser;
-	}
-
-	public void setForeleserByForeleser(Foreleser foreleserByForeleser) {
-		this.foreleserByForeleser = foreleserByForeleser;
-	}
 
 	public void updateStemmer(Integer gammel, Integer ny) {
 		if (gammel != null) {

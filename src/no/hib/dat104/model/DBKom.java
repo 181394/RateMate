@@ -50,6 +50,17 @@ public Forelesning getForelesning(Date dato) {return em.find(Forelesning.class, 
         	em.persist(s);
         }
     }
+    
+    public void lastOppForelesning(Forelesning f1) {
+    	System.out.println(f1.getDato());
+    	System.out.println(f1.getKlStart());
+    	System.out.println(f1.getKlSlutt());
+    	System.out.println(f1.getFag());
+    	em.persist(f1);}
+    
+//    public Fag hentFag(String ek) {
+//    	return em.find(Fag.class, ek);
+//    }
 
     public boolean finnesStudent(String studnr){
         return (em.find(Student.class, studnr) != null);

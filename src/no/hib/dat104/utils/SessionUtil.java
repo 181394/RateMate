@@ -1,6 +1,7 @@
 package no.hib.dat104.utils;
 
 import javax.ejb.EJB;
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -41,6 +42,11 @@ public class SessionUtil {
         if (session != null) {
             session.invalidate();
         }
+    }
+    
+    public static void setStemme(HttpServletRequest request, Integer ny) {
+    	HttpSession session = request.getSession(false);
+    	session.setAttribute("stemme", ny);
     }
 
 }

@@ -62,8 +62,8 @@ public class DBKom {
 
 	public void lastOppForelesning(Forelesning f1) {
 		System.out.println(f1.getDato());
-		System.out.println(f1.getKlStart());
-		System.out.println(f1.getKlSlutt());
+		System.out.println(f1.getKl_start());
+		System.out.println(f1.getKl_slutt());
 		System.out.println(f1.getFag());
 		em.persist(f1);
 	}

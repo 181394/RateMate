@@ -2,19 +2,24 @@ package no.hib.dat104.controller;
 
 import java.io.IOException;
 import java.util.List;
-import no.hib.dat104.model.*;
-import no.hib.dat104.utils.*;
+
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/KaldenderServlet")
-public class KaldenderServlet extends HttpServlet {
+import no.hib.dat104.model.DBKom;
+import no.hib.dat104.model.Forelesning;
+import no.hib.dat104.utils.SessionUtil;
+
+public class KalenderServlet extends HttpServlet {
+	@EJB
+	DBKom dbk;
+	
 	private static final long serialVersionUID = 1L;
 
-	DBKom dbKom = new DBKom();
+
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -23,12 +28,13 @@ public class KaldenderServlet extends HttpServlet {
 			request.getRequestDispatcher("WebContent/foreleserlogin.jsp").forward(request, response);
 		} else {
 			// Henter ut liste med forelesningene fra DB
-			List<Forelesning> forelesninger = dbKom.fliste();
-			int str = forelesninger.size();
-			request.getSession().setAttribute("str", str);
+			List<Forelesning> forelesninger = dbk.fliste();
+//			int str = forelesninger.size();
+			// Preben vil ha alle session ting i SessionUtil :)
+//			request.getSession().setAttribute("str", str);
 			request.getSession().setAttribute("forelesninger", forelesninger);
 			// Foreleser er innlogget -->	kalenderside
-			request.getRequestDispatcher("WebContent/kalender.jsp").forward(request, response); 
+			request.getRequestDispatcher("WEB-INF/Kalender.jsp").forward(request, response); 
 		}
 	}
 }

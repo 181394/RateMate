@@ -14,20 +14,34 @@ import javax.persistence.*;
 public class Forelesning {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	private String dato;
-	private String klStart;
-	private String klSlutt;
+	private String kl_start;
+	private String kl_slutt;
 	@ManyToOne
 	@JoinColumn(name = "fag", referencedColumnName = "emnekode")
-	private String fag;
+	@Column(name = "fag")
+	private Fag fag;
+	@Column(name = "bra")
 	private Integer bra;
+	@Column(name = "middels")
 	private Integer middels;
+	@Column(name = "daarlig")
 	private Integer daarlig;
 
+	public Forelesning() {
+	}
 
-	@Basic
-	@Column(name = "dato")
+	public Forelesning(String dato, String kl_start, String kl_slutt, Fag fag) {
+		this.dato = dato;
+		this.kl_start = kl_start;
+		this.kl_slutt = kl_slutt;
+		this.fag = fag;
+		this.bra = null;
+		this.middels = null;
+		this.daarlig = null;
+	}
+
 	public String getDato() {
 		return dato;
 	}
@@ -36,38 +50,31 @@ public class Forelesning {
 		this.dato = dato;
 	}
 
-	@Basic
-	@Column(name = "kl_start")
-	public String getKlStart() {
-		return klStart;
+	public String getKl_start() {
+		return kl_start;
 	}
 
-	public void setKlStart(String klStart) {
-		this.klStart = klStart;
+	public void setKl_start(String klStart) {
+		this.kl_start = klStart;
 	}
 
-	@Basic
-	@Column(name = "kl_slutt")
-	public String getKlSlutt() {
-		return klSlutt;
+
+	public String getKl_slutt() {
+		return kl_slutt;
 	}
 
-	public void setKlSlutt(String klSlutt) {
-		this.klSlutt = klSlutt;
+	public void setKl_slutt(String klSlutt) {
+		this.kl_slutt = klSlutt;
 	}
 
-	@Basic
-	@Column(name = "fag")
-	public String getFag() {
+	public Fag getFag() {
 		return fag;
 	}
 
-	public void setFag(String fag) {
-		this.fag = fag;
+	public void setFag(Fag fl1) {
+		this.fag = fl1;
 	}
 
-	@Basic
-	@Column(name = "bra")
 	public Integer getBra() {
 		return bra;
 	}
@@ -76,8 +83,6 @@ public class Forelesning {
 		this.bra = bra;
 	}
 
-	@Basic
-	@Column(name = "middels")
 	public Integer getMiddels() {
 		return middels;
 	}
@@ -86,43 +91,12 @@ public class Forelesning {
 		this.middels = middels;
 	}
 
-	@Basic
-	@Column(name = "daarlig")
 	public Integer getDaarlig() {
 		return daarlig;
 	}
 
 	public void setDaarlig(Integer daarlig) {
 		this.daarlig = daarlig;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-
-		Forelesning that = (Forelesning) o;
-
-		if (id != that.id)
-			return false;
-		if (dato != null ? !dato.equals(that.dato) : that.dato != null)
-			return false;
-		if (klStart != null ? !klStart.equals(that.klStart) : that.klStart != null)
-			return false;
-		if (klSlutt != null ? !klSlutt.equals(that.klSlutt) : that.klSlutt != null)
-			return false;
-		if (fag != null ? !fag.equals(that.fag) : that.fag != null)
-			return false;
-		if (bra != null ? !bra.equals(that.bra) : that.bra != null)
-			return false;
-		if (middels != null ? !middels.equals(that.middels) : that.middels != null)
-			return false;
-		if (daarlig != null ? !daarlig.equals(that.daarlig) : that.daarlig != null)
-			return false;
-
-		return true;
 	}
 
 

@@ -20,9 +20,19 @@ public class SessionUtil {
     }
 
     public static boolean isInnlogget(HttpServletRequest request) {
+    	HttpSession session = request.getSession(false);
+    	return (session != null)
+    			&& (session.getAttribute("innloggetBruker") != null);
+    }
+    public static boolean isInnloggetStudent(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         return (session != null)
-                && (session.getAttribute("innloggetBruker") != null);
+                && (session.getAttribute("innloggetSomStudent") != null);
+    }
+    public static boolean isInnloggetForeleser(HttpServletRequest request) {
+    	HttpSession session = request.getSession(false);
+    	return (session != null)
+    			&& (session.getAttribute("innloggetSomForeleser") != null);
     }
 
     public static String isInnloggetSom(HttpServletRequest request) {
@@ -37,7 +47,6 @@ public class SessionUtil {
     }
 
     public static void loggUt(HttpServletRequest request) {
-
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();

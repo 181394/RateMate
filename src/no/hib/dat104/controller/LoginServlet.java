@@ -11,26 +11,21 @@ import no.hib.dat104.utils.SessionUtil;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(SessionUtil.isInnloggetStudent()) {
+		if(SessionUtil.isInnloggetStudent(request)) {
 			request.getRequestDispatcher("WEB-INF/stem.jsp").forward(request, response);
 		}
-		else if(SessionUtil.isInnloggetForeleser()){
+		else if(SessionUtil.isInnloggetForeleser(request)){
 			request.getRequestDispatcher("WEB-INF/homeForeleser.jsp").forward(request, response);
 		}
 		else {

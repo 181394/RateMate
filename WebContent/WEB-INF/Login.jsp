@@ -19,11 +19,11 @@
   </fieldset>
 </form>
 
-<form action="LoginForeleserServlet" method="post">
+<form action="LoginForeleser" method="post">
   <fieldset>
   	<h3>Foreleser</h3>
   	<p>Ansattnummer:</p>
-    <p><input type="text" name="passord"/></p>
+    <p><input type="text" name="ansattnr"/></p>
     <p>Passord:</p>
      <p><input type="password" name="passord"/></p>
      <p><input type="submit" value="Logg inn"/></p>

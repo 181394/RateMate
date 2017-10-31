@@ -1,11 +1,14 @@
 package no.hib.dat104.utils;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import no.hib.dat104.model.DBKom;
+import no.hib.dat104.model.Forelesning;
 
 public class SessionUtil {
 	@EJB
@@ -56,6 +59,10 @@ public class SessionUtil {
     public static void setStemme(HttpServletRequest request, Integer ny) {
     	HttpSession session = request.getSession(false);
     	session.setAttribute("stemme", ny);
+    }
+    public static void setForelesninger(HttpServletRequest request, List<Forelesning> forelesninger) {
+    	HttpSession session = request.getSession(false);
+    	session.setAttribute("forelesninger", forelesninger);
     }
 
 }

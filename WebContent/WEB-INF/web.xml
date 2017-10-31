@@ -5,6 +5,22 @@
     <welcome-file>/Login</welcome-file>
   </welcome-file-list>
   <servlet>
+    <servlet-name>LoggUtServlet</servlet-name>
+    <servlet-class>no.hib.dat104.controller.LoggUtServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoggUtServlet</servlet-name>
+    <url-pattern>/LoggUt</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>LiveServlet</servlet-name>
+    <servlet-class>no.hib.dat104.controller.LiveServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LiveServlet</servlet-name>
+    <url-pattern>/Live</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>no.hib.dat104.controller.LoginServlet</servlet-class>
   </servlet>

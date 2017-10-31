@@ -19,8 +19,6 @@ public class KalenderServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
-
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
@@ -29,10 +27,7 @@ public class KalenderServlet extends HttpServlet {
 		} else {
 			// Henter ut liste med forelesningene fra DB
 			List<Forelesning> forelesninger = dbk.fliste();
-//			int str = forelesninger.size();
-			// Preben vil ha alle session ting i SessionUtil :)
-//			request.getSession().setAttribute("str", str);
-			request.getSession().setAttribute("forelesninger", forelesninger);
+			SessionUtil.setForelesninger(request, forelesninger);	
 			// Foreleser er innlogget -->	kalenderside
 			request.getRequestDispatcher("WEB-INF/Kalender.jsp").forward(request, response); 
 		}

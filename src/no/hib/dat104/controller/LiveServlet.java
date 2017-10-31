@@ -41,13 +41,8 @@ public class LiveServlet extends HttpServlet {
 		if (SessionUtil.isInnloggetForeleser(request)) {
 			request.getRequestDispatcher("WEB-INF/Login.jsp").forward(request, response);
 		} else {
-		
-			Date dato = new Date();
-			//Forelesning f = dbk.getForelesning(dato);
-			Forelesning f = new Forelesning();
-			f.setBra(5);
-			f.setDaarlig(4);
-			f.setMiddels(3);
+			
+			Forelesning f = dbk.getForelesning();
 			
 			request.getSession().setAttribute("forelesning", f);
 			request.getRequestDispatcher("WEB-INF/live.jsp").forward(request, response);

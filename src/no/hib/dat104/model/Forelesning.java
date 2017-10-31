@@ -42,6 +42,10 @@ public class Forelesning {
 		this.daarlig = null;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
 	public String getDato() {
 		return dato;
 	}
@@ -57,7 +61,6 @@ public class Forelesning {
 	public void setKl_start(String klStart) {
 		this.kl_start = klStart;
 	}
-
 
 	public String getKl_slutt() {
 		return kl_slutt;
@@ -99,18 +102,33 @@ public class Forelesning {
 		this.daarlig = daarlig;
 	}
 
+	private void testStemmer() {
+		if (bra == null)
+			bra = 0;
+		if (middels == null)
+			middels = 0;
+		if (daarlig == null)
+			daarlig = 0;
+
+	}
 
 	public void updateStemmer(Integer gammel, Integer ny) {
+		testStemmer();
+		System.out.println("Gammel: " + gammel);
+		System.out.println("Ny: " + ny);
 		if (gammel != null) {
 			switch (gammel) {
 			case 0:
-				bra--;
+				if (!(bra == 0))
+					bra--;
 				break;
 			case 1:
-				middels--;
+				if (!(middels == 0))
+					middels--;
 				break;
 			case 2:
-				daarlig--;
+				if (!(daarlig == 0))
+					daarlig--;
 				break;
 			}
 		}

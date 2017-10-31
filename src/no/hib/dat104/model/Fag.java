@@ -26,8 +26,17 @@ public class Fag {
 
     public Fag() {
     }
+    
+    
 
-    public String getEmnekode() {
+    public Fag(String emnekode, String navn) {
+	this.emnekode = emnekode;
+	this.navn = navn;
+}
+
+
+
+	public String getEmnekode() {
         return emnekode;
     }
 

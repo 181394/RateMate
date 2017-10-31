@@ -14,21 +14,49 @@ public class DBKom {
 	@PersistenceContext(name = "RateMatePersistenceUnit")
 	private EntityManager em;
 
-	public void UpdateStudent(Student s) {
-		em.persist(s);
+	public void UpdateStudent(Student s, Integer ny) {
+		Student stud = em.find(Student.class, s.getStudentnr());
+		stud.setRating(ny);
+		em.persist(stud);
+	}
+
+	public Forelesning getForelesning() {
+		Date date = new Date();
+		String ekstraNull = "";
+		String[] dato = new String[3];
+		String[] klokken = new String[2];
+		if (date.getMinutes() < 10)
+			ekstraNull = "0";
+		dato[0]= "" + date.getDate();
+		dato[1]= "" + (date.getMonth()+1);
+		dato[2]= "" + (date.getYear() + 1900);
+		klokken[0] = "" + date.getHours();
+		klokken[1] =  ekstraNull + date.getMinutes();
+
+		
+		return getForelesning1(dato, klokken);
+	}
+	
+
+	private Forelesning getForelesning1(String[] dato, String[] klokken) {
+		List<Forelesning> forelesning = fliste();
+		for (Forelesning f : forelesning) {
+			if (f.getDato().equals(dato[0] + "." + dato[1] + "." + dato[2])){
+				if (f.getKl_start().compareTo(klokken[0] + ":" + klokken[1])<=0 && f.getKl_slutt().compareTo(klokken[0] + ":" + klokken[1]) > 0 ) {
+					return f;
+				}
+			}
+		}
+		return null;
 	}
 
 	public void UpdateLive(Integer gammel, Integer ny) {
-		Date dato = new Date();
-		Forelesning f1 = getForelesning(dato);
-		f1.updateStemmer(gammel, ny);
-		em.persist(f1);
+		Forelesning f1 = em.find(Forelesning.class, getForelesning().getId());
+		if (f1 != null) {
+			f1.updateStemmer(gammel, ny);
+			em.persist(f1);
+		}
 	}
-
-	public Forelesning getForelesning(Date dato) {
-		return em.find(Forelesning.class, dato);
-	}
-
 	public List<Forelesning> fliste() {
 		Query query = em.createQuery("SELECT f FROM Forelesning f ORDER BY f.dato DESC", Forelesning.class);
 		return query.getResultList();

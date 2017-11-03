@@ -114,8 +114,6 @@ public class Forelesning {
 
 	public void updateStemmer(Integer gammel, Integer ny) {
 		testStemmer();
-		System.out.println("Gammel: " + gammel);
-		System.out.println("Ny: " + ny);
 		if (gammel != null) {
 			switch (gammel) {
 			case 0:

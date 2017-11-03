@@ -6,12 +6,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.css" rel="stylesheet" type="text/css">
 <title>Kalender</title>
 </head>
 <body>
+	<form style="alignement: center" action="Fhjem">
+	<button class="ui left attached button" type="submit" name="url" value="Live">Live</button>
+	<button class="right attached ui button" type="submit" name="url" value="Kalender">Kalender</button>
+	</form>
 	<h2>Kalender</h2>
+	
+	
 	<form action="KalenderServlet" method="get">
-		<table border="1">
+		<table class="ui selectable celled table" border="1">
 			<tr>
 				<th>Dato</th>
 				<th>Fra kl.</th>
@@ -36,5 +43,8 @@
 			</c:forEach>
 		</table>
 	</form>
+<form action="LoggUt" method="get">
+<input type="submit" value="Logg Ut"/>
+</form>
 </body>
 </html>

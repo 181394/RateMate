@@ -22,18 +22,25 @@ public class DBKom {
 
 	public Forelesning getForelesning() {
 		Date date = new Date();
+		String enNull = "";
 		String ekstraNull = "";
+		String endaEnNull = "";
+		String sisteNull = "";
 		String[] dato = new String[3];
 		String[] klokken = new String[2];
 		if (date.getMinutes() < 10)
 			ekstraNull = "0";
-		dato[0]= "" + date.getDate();
-		dato[1]= "" + (date.getMonth()+1);
+		if (date.getHours()< 10)
+			sisteNull = "0";
+		if (date.getDate() < 10)
+			endaEnNull = "0";
+		if (date.getMonth()< 10)
+			enNull = "0";
+		dato[0]= endaEnNull + date.getDate();
+		dato[1]= enNull + (date.getMonth()+1);
 		dato[2]= "" + (date.getYear() + 1900);
-		klokken[0] = "" + date.getHours();
-		klokken[1] =  ekstraNull + date.getMinutes();
-
-		
+		klokken[0] = sisteNull + date.getHours();
+		klokken[1] =  ekstraNull + date.getMinutes();		
 		return getForelesning1(dato, klokken);
 	}
 	

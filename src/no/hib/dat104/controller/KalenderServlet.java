@@ -23,7 +23,7 @@ public class KalenderServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		if (!SessionUtil.isInnlogget(request)) { // Hvis foreleser ikke er innlogget --> innloggingsside
-			request.getRequestDispatcher("WebContent/foreleserlogin.jsp").forward(request, response);
+			response.sendRedirect("Login");
 		} else {
 			// Henter ut liste med forelesningene fra DB
 			List<Forelesning> forelesninger = dbk.fliste();

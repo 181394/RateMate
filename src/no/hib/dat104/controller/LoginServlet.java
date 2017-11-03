@@ -4,11 +4,9 @@ import java.io.IOException;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import no.hib.dat104.model.DBKom;
 import no.hib.dat104.utils.SessionUtil;
 
@@ -21,85 +19,50 @@ public class LoginServlet extends HttpServlet {
 	DBKom dbk;
 	
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String personType = (String) request.getAttribute("LoggetInnSom");
-		
-		// PRG fra doPost her
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		String personType = SessionUtil.getRolle(request);
+		/**
+		 * Tester om personen er logget inn og isåfall som hva.
+		 */
 		if(personType != null) {
-			if(personType.equals("foreleser")) {
-				response.sendRedirect("Kalender");
-			}
-			else {
-				request.getRequestDispatcher("WEB-INF/stem.jsp").forward(request, response);
-			}
-		}
-		
-		// Tester om personen allerede er logget inn, sender videre deretter
-		else {
-			if(SessionUtil.isInnloggetStudent(request)) {
-				request.getRequestDispatcher("WEB-INF/stem.jsp").forward(request, response);
-			}
-			else if(SessionUtil.isInnloggetForeleser(request)){
-				request.getRequestDispatcher("WEB-INF/Kalender.jsp").forward(request, response);
-			}
-			else {
+			if(personType.equals("foreleser"))
+				response.sendRedirect("Live");
+			else 
+				response.sendRedirect("Stem");
+		}else 
 				request.getRequestDispatcher("WEB-INF/Login.jsp").forward(request, response);
-			}
-		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String feilmelding;
 		String ansattnr = request.getParameter("ansattnr");
 		String passord = request.getParameter("passord");
 		String studentnr = request.getParameter("studentnr");
 		
 		// Logger inn som foreleser
-		if(!ansattnr.equals(null) && !passord.equals(null)) {
-			String feilmelding = "Ansattnummeret eksisterer ikke eller passordet er feil.";
+		if(ansattnr != null && passord != null) {
+			feilmelding = "Ansattnummeret eksisterer ikke eller passordet er feil.";
 
 			if (!dbk.finnesForeleser(ansattnr, passord)) {
-				request.setAttribute("feilmelding", feilmelding);
-				response.sendRedirect("Login");
+				SessionUtil.setLoginFeil(request, feilmelding);
 			} else {
 				SessionUtil.loggInnSom(request, ansattnr);
-				request.setAttribute("LoggetInnSom", "foreleser");
-				doGet(request, response);
+				SessionUtil.setRolle(request, "foreleser");
 			}
 		}
 		
 		// Logger inn som student
-		else if(!studentnr.equals(null)) {
-			String feilmelding = "Studentnummeret eksisterer ikke.";
+		else if (studentnr != null) {
+			feilmelding = "Studentnummeret eksisterer ikke.";
 			
-			if(!dbk.finnesStudent(studentnr)) {
-				request.setAttribute("feilmelding", feilmelding);
-				
-				response.sendRedirect("LoginServlet");
-			}
-			else {
+			if(!dbk.finnesStudent(studentnr))
+				SessionUtil.setLoginFeil(request, feilmelding);
+			 else {
 				SessionUtil.loggInnSom(request, studentnr);
-				request.setAttribute("LoggetInnSom", "student");
-				doGet(request, response);
+				SessionUtil.setRolle(request, "student");
 			}
 		}
-		
-		// Logget ikke inn som noen ting
-		else {
-			request.setAttribute("feilmelding", "Ingenting ble skrevet inn.");
-			request.getRequestDispatcher("WEB-INF/Login.jsp").forward(request, response);
-		}
+		response.sendRedirect("Login");
 	}
 
 }

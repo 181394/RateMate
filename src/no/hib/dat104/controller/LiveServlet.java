@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import no.hib.dat104.model.DBKom;
+import no.hib.dat104.model.Fag;
 import no.hib.dat104.model.Forelesning;
 import no.hib.dat104.utils.SessionUtil;
 
@@ -37,14 +38,18 @@ public class LiveServlet extends HttpServlet {
 	 */
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		if (SessionUtil.isInnloggetForeleser(request)) {
-			request.getRequestDispatcher("WEB-INF/Login.jsp").forward(request, response);
+		if (!SessionUtil.isInnloggetForeleser(request)) {
+			response.sendRedirect("Login");
 		} else {
 			
 			Forelesning f = dbk.getForelesning();
-			
-			request.getSession().setAttribute("forelesning", f);
+			if (f == null) {
+				f = new Forelesning("Ingen aktiv forelesning", "Ingen aktiv forelesning", "Ingen aktiv forelesning", new Fag("Ingen aktive fag", ""));
+				f.setBra(0);
+				f.setDaarlig(0);
+				f.setMiddels(0);
+			}
+			request.getSession(false).setAttribute("forelesning", f);
 			request.getRequestDispatcher("WEB-INF/live.jsp").forward(request, response);
 		}
 	}

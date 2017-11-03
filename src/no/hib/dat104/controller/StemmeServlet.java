@@ -42,6 +42,7 @@ public class StemmeServlet extends HttpServlet {
 			response.sendRedirect("Login");
 		}
 		Forelesning f1 = dbk.getForelesning();
+		System.out.println(f1 != null);
 		if (f1 != null)
 			session.setAttribute("Forelesning", f1.getFag().getEmnekode() + ": " + f1.getFag().getNavn());
 		else

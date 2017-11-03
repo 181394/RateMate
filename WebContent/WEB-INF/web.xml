@@ -45,11 +45,11 @@
     <url-pattern>/Kalender</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>LoginForeleserServlet</servlet-name>
-    <servlet-class>no.hib.dat104.controller.LoginForeleserServlet</servlet-class>
+    <servlet-name>FhjemServlet</servlet-name>
+    <servlet-class>no.hib.dat104.controller.FhjemServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>LoginForeleserServlet</servlet-name>
-    <url-pattern>/LoginForeleser</url-pattern>
+    <servlet-name>FhjemServlet</servlet-name>
+    <url-pattern>/Fhjem</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -37,7 +37,7 @@
 			RateMate!</h1>
 		<p align="center">Vennligst logg inn som student eller foreleser</p>
 		<p align="center">
-			<c:out value="${feilmelding}" />
+			<c:out value="${feilLogin}" />
 		</p>
 		<div class="forms" style="margin-left: 15%">
 			<form class="ui form" action="Login" method="post">

@@ -26,7 +26,7 @@ public class KalenderServlet extends HttpServlet {
 			response.sendRedirect("Login");
 		} else {
 			// Henter ut liste med forelesningene fra DB
-			List<Forelesning> forelesninger = dbk.fliste();
+			List<Forelesning> forelesninger = dbk.flistesort();
 			SessionUtil.setForelesninger(request, forelesninger);	
 			// Foreleser er innlogget -->	kalenderside
 			request.getRequestDispatcher("WEB-INF/Kalender.jsp").forward(request, response); 

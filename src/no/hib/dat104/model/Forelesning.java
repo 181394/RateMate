@@ -102,6 +102,49 @@ public class Forelesning {
 		this.daarlig = daarlig;
 	}
 
+	private int datoToInt(Forelesning f) {
+		String[] datoArr = { f.dato.substring(0, 2), f.dato.substring(3, 5), f.dato.substring(6, 10) };
+		String revDato = datoArr[2] + datoArr[1] + datoArr[0];
+		return Integer.parseInt(revDato);
+	}
+
+	private int datoToInt(String dato) {
+		String[] datoArr = { dato.substring(0, 2), dato.substring(3, 5), dato.substring(6, 10) };
+		String revDato = datoArr[2] + datoArr[1] + datoArr[0];
+		return Integer.parseInt(revDato);
+	}
+
+	private int klokkeToInt(Forelesning f) {
+		String[] klokkeArr = f.kl_start.split(":");
+		String klokken = klokkeArr[0] + klokkeArr[1];
+		return Integer.parseInt(klokken);
+	}
+
+	public int compareTo(Forelesning f) {
+		if (datoToInt(this) == datoToInt(f))
+			return klokkeToInt(this) < klokkeToInt(f) ? -1 : 1;
+
+		else if (datoToInt(this) < datoToInt(f))
+			return -1;
+		else
+			return 1;
+	}
+
+	public int compareTo(String dato, String klokke) {
+		if (datoToInt(this) == datoToInt(dato))
+			return klokkeToInt(this) < klokkeToInt(klokke) ? -1 : 1;
+
+		else if (datoToInt(this) < datoToInt(dato))
+			return -1;
+		else
+			return 1;
+	}
+
+	private int klokkeToInt(String klokke) {
+		String klokken = klokke.replace(":", "");
+		return Integer.parseInt(klokken);
+	}
+
 	private void testStemmer() {
 		if (bra == null)
 			bra = 0;
@@ -110,6 +153,12 @@ public class Forelesning {
 		if (daarlig == null)
 			daarlig = 0;
 
+	}
+
+	public void nullstill() {
+		bra = 0;
+		middels = 0;
+		daarlig = 0;
 	}
 
 	public void updateStemmer(Integer gammel, Integer ny) {
@@ -130,7 +179,6 @@ public class Forelesning {
 				break;
 			}
 		}
-
 		switch (ny) {
 		case 0:
 			bra++;
@@ -142,5 +190,6 @@ public class Forelesning {
 			daarlig++;
 			break;
 		}
+
 	}
 }

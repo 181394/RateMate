@@ -61,5 +61,12 @@ public class SessionUtil {
     public static void setLoginFeil(HttpServletRequest request, String feilmelding) {
     	request.getSession(false).setAttribute("feilLogin", feilmelding);
     }
+	public static void setURL(HttpServletRequest request, String URL) {
+		request.getSession(false).setAttribute("URL", URL);
+	}
+	public static String getURL(HttpServletRequest request) {
+		return (String) request.getSession(false).getAttribute("URL");
+		
+	}
 
 }

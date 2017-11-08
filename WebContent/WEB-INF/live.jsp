@@ -12,7 +12,7 @@
 </head>
 <body>
 <div style="width: 30%; alignment: center">
-<form action="Fhjem">
+<form action="Fhjem" method="post">
 	<button class="ui left attached button" type="submit" name="url" value="Live">Live</button>
 	<button class="right attached ui button" type="submit" name="url" value="Kalender">Kalender</button>
 </form>

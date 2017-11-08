@@ -36,7 +36,7 @@
 		<h1 align="center" style="margin-top: 15%">Velkommen til
 			RateMate!</h1>
 		<p align="center">Vennligst logg inn som student eller foreleser</p>
-		<p align="center">
+		<p style="color:red" align="center">
 			<c:out value="${feilLogin}" />
 		</p>
 		<div class="forms" style="margin-left: 15%">

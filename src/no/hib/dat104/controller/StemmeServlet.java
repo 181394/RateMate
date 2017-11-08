@@ -40,13 +40,13 @@ public class StemmeServlet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		if (!SessionUtil.isInnlogget(request)) {
 			response.sendRedirect("Login");
+		} else {
+			Forelesning f1 = dbk.getForelesning();
+			if (f1 != null)
+				session.setAttribute("Forelesning", f1.getFag().getEmnekode() + ": " + f1.getFag().getNavn());
+			else
+				session.setAttribute("Forelesning", "Ingen aktive forelesninger");
+			request.getRequestDispatcher("WEB-INF/stem.jsp").forward(request, response);
 		}
-		Forelesning f1 = dbk.getForelesning();
-		System.out.println(f1 != null);
-		if (f1 != null)
-			session.setAttribute("Forelesning", f1.getFag().getEmnekode() + ": " + f1.getFag().getNavn());
-		else
-			session.setAttribute("Forelesning", "Ingen aktive forelesninger");
-		request.getRequestDispatcher("WEB-INF/stem.jsp").forward(request, response);;
 	}
 }

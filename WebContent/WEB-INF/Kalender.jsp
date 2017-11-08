@@ -10,14 +10,14 @@
 <title>Kalender</title>
 </head>
 <body>
-	<form style="alignement: center" action="Fhjem">
+	<form style="alignement: center" action="Fhjem" method="post">
 	<button class="ui left attached button" type="submit" name="url" value="Live">Live</button>
 	<button class="right attached ui button" type="submit" name="url" value="Kalender">Kalender</button>
 	</form>
 	<h2>Kalender</h2>
 	
 	
-	<form action="KalenderServlet" method="get">
+	<form class="ui form" action="KalenderServlet" method="get">
 		<table class="ui selectable celled table" border="1">
 			<tr>
 				<th>Dato</th>
